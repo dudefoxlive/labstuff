@@ -28,6 +28,7 @@ apt install -y \
     net-tools \
     dnsutils \
     build-essential \
+    fail2ban \
     gnupg \
     locales-all \
     iptables \
