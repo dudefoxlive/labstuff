@@ -80,7 +80,7 @@ fi
 # If cancel is selected, exit
 if [ $? -eq 1 ]; then
     echo "Scripts are located at /opt/harrilabstuff"    
-    exit 1
+    exit 0
 fi
 
 # Clean up
