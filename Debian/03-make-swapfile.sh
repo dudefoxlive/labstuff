@@ -15,25 +15,38 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-echo "By default this Swapfile will be 2GB in size"
+# Check if `dialog` is installed
+if ! [ -x "$(command -v dialog)" ]; then
+  echo 'dialog is not installed. Installing...' >&2
+  apt-get install -y dialog
+fi
 
-# Create a 2GB swapfile
-fallocate -l 2G /swapfile
+# Dialog for swapfile size (2, 4, 8, 16, 32, 64, 128)
+dialog --title "Swapfile Size" --menu "Choose the size of the swapfile" 10 40 7 \
+2 "2GB" \
+4 "4GB" \
+8 "8GB" \
+16 "16GB" \
+32 "32GB" \
+64 "64GB" \
+128 "128GB" 2> /tmp/swapfile_size
+
+# Get the swapfile size from the dialog
+SWAPFILE_SIZE=$(cat /tmp/swapfile_size)
+
+# Create the swapfile
+fallocate -l $SWAPFILE_SIZE /swapfile
 
 # Set the correct permissions
 chmod 600 /swapfile
 
-# Set the swapfile as a swap area
+# Set up a Linux swap area
 mkswap /swapfile
 
 # Enable the swapfile
 swapon /swapfile
 
-# Add the swapfile to the fstab file
+# Add the swapfile to the /etc/fstab file
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-# Done
-echo "Swapfile Configuration Complete"
-echo "Swapfile Size: 2GB"
-echo "Swapfile Location: /swapfile"
-echo "Swapfile Enabled: Yes"
+
