@@ -47,9 +47,9 @@ cd /opt/harrilabstuff
 
 # Using OS Check, cd to the correct directory
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
-    cd debian
+    cd Debian
 elif [ "$OS" = "CentOS Linux" ] || [ "$OS" = "AlmaLinux" ] || ["$OS" = "Rocky Linux"]; then
-    cd rhel
+    cd RHEL
 else
     echo "OS not supported"
     exit 1
