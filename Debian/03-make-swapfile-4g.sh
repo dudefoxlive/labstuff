@@ -6,7 +6,7 @@
 # ██   ██ ██   ██ ██   ██ ██   ██ ██     ██ ███ ██ ██    ██  ███        ██   ██ ██      ██   ██ ██      
 # ██   ██ ██   ██ ██   ██ ██   ██ ██      ███ ███   ██████  ███████     ██   ██ ███████ ██   ██ ███████ 
                                                                                                       
-# Debian Base Packages
+# Debian swapfile installation
 # Last Updated [03-03-2024]
 
 # Check if the script is running as root
@@ -15,52 +15,25 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-# Configure Global Locales to en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8
-export LANG=en_GB.UTF-8
-export LANGUAGE=en_GB.UTF-8
+echo "By default this Swapfile will be 4GB in size"
 
-# Update and upgrade
-apt update && apt upgrade -y
+# Create a 4GB swapfile
+fallocate -l 4G /swapfile
 
-# Install base packages
-apt install -y \
-    sudo \
-    curl \
-    wget \
-    nload \
-    vnstat \
-    net-tools \
-    dnsutils \
-    build-essential \
-    fail2ban \
-    gnupg \
-    locales-all \
-    iptables \
-    python3 \
-    python3-pip \
-    axel \
-    bpytop \
-    git \
-    zsh \
-    neofetch \
-    htop \
-    tmux \
-    tmate \
-    nano \
-    unzip \
-    zip \
-    p7zip-full \
-    unrar \
-    bzip2 \
-    ncdu \
-    dialog\
-    ruby
+# Set the correct permissions
+chmod 600 /swapfile
 
-# Clean up
-apt autoremove -y
-apt autoclean -y
-apt clean -y
+# Set the swapfile as a swap area
+mkswap /swapfile
+
+# Enable the swapfile
+swapon /swapfile
+
+# Add the swapfile to the fstab file
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 # Done
-echo "Base packages installed successfully"
+echo "Swapfile Configuration Complete"
+echo "Swapfile Size: 4GB"
+echo "Swapfile Location: /swapfile"
+echo "Swapfile Enabled: Yes"
