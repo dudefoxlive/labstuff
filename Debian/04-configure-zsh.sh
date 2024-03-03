@@ -15,8 +15,9 @@ if ! [ -x "$(command -v zsh)" ]; then
   exit 1
 fi
 
-# Install Oh My Zsh
+# Automated installation of oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 
 # Set zsh as the default shell
 chsh -s $(which zsh)
@@ -31,6 +32,7 @@ cp ~/.oh-my-zsh/themes/kphoen.zsh-theme ~/.oh-my-zsh/themes/kphoen.zsh-theme.bak
 rm ~/.oh-my-zsh/themes/kphoen.zsh-theme
 
 # Copy new kphoen from /opt/harrilabstuff/configs/zsh/kphoen.zsh-theme
+cp /opt/harrilabstuff/configs/zsh/kphoen.zsh-theme ~/.oh-my-zsh/themes/kphoen.zsh-theme
 
 # Add profile.d call to .zshrc
 echo "for file in /etc/profile.d/*.sh; do" >> ~/.zshrc
