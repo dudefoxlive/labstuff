@@ -36,6 +36,12 @@ fi
 # Clone the repo to /opt
 git clone https://github.com/ao554/harrilabstuff.git /opt/harrilabstuff
 
+# If Repository is already cloned, pull the latest
+if [ -d /opt/harrilabstuff ]; then
+    cd /opt/harrilabstuff
+    git pull
+fi
+
 # Change directory to the repo
 cd /opt/harrilabstuff
 
