@@ -23,11 +23,11 @@ if [ -f /etc/os-release ]; then
     VER=$VERSION_ID
 fi
 
-# Install git using OS package manager (Debian based and RHEL Based only)
+# Install git and dialog using OS package manager (Debian based and RHEL Based only)
 if [ "$OS" = "Debian GNU/Linux" ] || [ "$OS" = "Ubuntu" ]; then
-    apt update && apt install -y git
+    apt update && apt install -y git dialog
 elif [ "$OS" = "CentOS Linux" ] || [ "$OS" = "AlmaLinux" ] || ["$OS" = "Rocky Linux"]; then
-    yum install -y git
+    yum install -y git dialog
 else
     echo "OS not supported"
     exit 1 
