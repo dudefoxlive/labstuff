@@ -12,8 +12,9 @@
 # Check if zsh package is installed
 if ! [ -x "$(command -v zsh)" ]; then
   echo 'Error: zsh is not installed.' >&2
-  exit 1
+  sudo apt-get install -y zsh
 fi
+
 
 # Automated installation of oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

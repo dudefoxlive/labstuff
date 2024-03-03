@@ -23,13 +23,13 @@ fi
 
 # Dialog for swapfile size (2, 4, 8, 16, 32, 64, 128)
 dialog --title "Swapfile Size" --menu "Choose the size of the swapfile" 10 40 7 \
-2 "2GB" \
-4 "4GB" \
-8 "8GB" \
-16 "16GB" \
-32 "32GB" \
-64 "64GB" \
-128 "128GB" 2> /tmp/swapfile_size
+2 "2G" \
+4 "4G" \
+8 "8G" \
+16 "16G" \
+32 "32G" \
+64 "64G" \
+128 "128G" 2> /tmp/swapfile_size
 
 # Check the exit status of dialog
 if [ $? -eq 0 ]; then
