@@ -55,19 +55,22 @@ else
     exit 1
 fi
 
-# Run the script
-bash 00-base-pkgs.sh
+# Collect list of available scripts for dialog into an array
+scripts=(*.sh)
 
-# Collect list of available scripts for dialog into a vairable
-scripts=$(ls *.sh)
+# Create a menu items array
+menu_items=()
+for i in "${!scripts[@]}"; do
+  menu_items+=("$i" "${scripts[$i]}")
+done
 
 # Run dialog to give options to run other scripts
 dialog --title "Select a script to run" \
 --menu "Choose one of the following options:" 15 40 4 \
-$scripts 2> /tmp/selection
+"${menu_items[@]}" 2> /tmp/selection
 
 # Run the selected script
-bash $(cat /tmp/selection)
+bash "${scripts[$(cat /tmp/selection)]}"
 
 # If cancel is selected, exit
 if [ $? -eq 1 ]; then
