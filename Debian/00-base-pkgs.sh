@@ -51,7 +51,6 @@ apt install -y \
     unzip \
     zip \
     p7zip-full \
-    unrar \
     bzip2 \
     ncdu \
     dialog\
