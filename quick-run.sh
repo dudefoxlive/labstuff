@@ -72,6 +72,11 @@ dialog --title "Select a script to run" \
 # Run the selected script
 bash "${scripts[$(cat /tmp/selection)]}"
 
+# return to the previous dialog after the script has finished
+if [ $? -eq 0 ]; then
+    bash /opt/harrilabstuff/quick-run.sh
+fi
+
 # If cancel is selected, exit
 if [ $? -eq 1 ]; then
     echo "Scripts are located at /opt/harrilabstuff"    
