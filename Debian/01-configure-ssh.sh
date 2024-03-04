@@ -22,10 +22,10 @@ apt install -y openssh-server
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
 
 # Set the SSH port to 82
-sed -i 's/#Port 22/Port 82/g' /etc/ssh/sshd_config
+# sed -i 's/#Port 22/Port 82/g' /etc/ssh/sshd_config
 
-# Disable root login
-sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+# set root login to prohibit-password
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
 
 # Enable Keys
 sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
@@ -41,8 +41,8 @@ systemctl status ssh
 
 # Done
 echo "SSH Configuration Complete"
-echo "SSH Port: 82"
-echo "Root Login: Disabled"
+#echo "SSH Port: 82"
+echo "Root Login: Prohibit Password / Key login only!"
 echo "Password Authentication: Disabled"
 echo "Keys: Enabled"
 echo "Please make sure to open the port 82 in your firewall"
